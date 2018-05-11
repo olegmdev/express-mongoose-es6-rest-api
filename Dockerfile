@@ -1,7 +1,7 @@
 # Use latest node version 8.x
-FROM node:8.10.0
+FROM node:10.1.0
 
-MAINTAINER Kunal Kapadia <kunalkapadia12@gmail.com>
+MAINTAINER Oleg Meleshko <qu1ze34@gmail.com>
 
 # create app directory in container
 RUN mkdir -p /app
@@ -19,8 +19,8 @@ RUN yarn --pure-lockfile
 # copy all file from current dir to /app in container
 COPY . /app/
 
-# expose port 4040
-EXPOSE 4040
+# expose port 80
+EXPOSE 80
 
 # cmd to start service
 CMD [ "yarn", "start" ]

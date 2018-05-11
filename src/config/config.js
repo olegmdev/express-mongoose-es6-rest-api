@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi'
 
 // require and configure dotenv, will load vars in .env in PROCESS.ENV
 require('dotenv').config();
@@ -9,7 +9,7 @@ const envVarsSchema = Joi.object({
     .allow(['development', 'production', 'test', 'provision'])
     .default('development'),
   PORT: Joi.number()
-    .default(4040),
+    .default(80),
   MONGOOSE_DEBUG: Joi.boolean()
     .when('NODE_ENV', {
       is: Joi.string().equal('development'),

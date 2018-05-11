@@ -1,9 +1,9 @@
-const express = require('express');
-const validate = require('express-validation');
-const expressJwt = require('express-jwt');
-const paramValidation = require('../../config/param-validation');
-const authCtrl = require('./auth.controller');
-const config = require('../../config/config');
+import express from 'express'
+import validate from 'express-validation'
+import expressJwt from 'express-jwt'
+import paramValidation from '../../config/param-validation'
+import authCtrl from './auth.controller'
+import config from '../../config/config'
 
 const router = express.Router(); // eslint-disable-line new-cap
 

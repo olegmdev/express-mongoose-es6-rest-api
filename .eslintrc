@@ -18,6 +18,9 @@
       2,
       "nofunc"
     ],
+    "semi": [
+      0
+    ],
     // TODO: turn on later
     "comma-dangle": [
       0

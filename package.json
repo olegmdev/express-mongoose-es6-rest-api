@@ -1,45 +1,36 @@
 {
   "name": "express-mongoose-es6-rest-api",
-  "version": "5.0.0",
+  "version": "0.0.1",
   "description": "A Boilerplate application for building REST APIs using express, mongoose in ES6 with code coverage",
-  "author": "Kunal Kapadia <kunalkapadia12@gmail.com>",
+  "author": "Oleg Meleshko",
   "main": "index.js",
-  "private": false,
+  "private": true,
   "engines": {
-    "node": ">=8.10.0",
-    "npm": ">=5.6.0",
-    "yarn": ">=1.5.1"
+    "node": ">=10.1.0",
+    "npm": ">=6.0.0",
+    "yarn": ">=1.6.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node dist/index.js",
+    "dev": "babel-watch src/index.js --presets=env",
+    "build": "babel src --out-dir dist --presets=env",
+    "docker:dev": "sh bin/development.sh",
+    "docker:test": "sh bin/test.sh",
+    "docker:prod": "sh bin/production.sh",
     "start:debug": "cross-env DEBUG=express-mongoose-es6-rest-api:* yarn start",
     "lint": "esw *.js server config --color",
     "lint:watch": "yarn lint -- --watch",
     "precommit": "yarn lint && yarn test",
-    "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors server --recursive",
+    "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors --compilers js:babel-core/register src --recursive",
     "test:watch": "yarn test -- --watch",
-    "test:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/istanbul cover _mocha -- --ui bdd --reporter spec --colors server --recursive",
+    "test:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/istanbul cover _mocha -- --ui bdd --reporter spec --colors --compilers js:babel-core/register src --recursive",
     "test:check-coverage": "yarn test:coverage && istanbul check-coverage",
     "report-coverage": "coveralls < ./coverage/lcov.info"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:KunalKapadia/express-mongoose-es6-rest-api.git"
-  },
-  "keywords": [
-    "express",
-    "node",
-    "node.js",
-    "mongodb",
-    "mongoose",
-    "es6",
-    "mocha",
-    "istanbul",
-    "REST",
-    "API",
-    "boilerplate"
-  ],
   "dependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "babel-watch": "2.0.7",
     "bluebird": "3.5.1",
     "body-parser": "1.18.2",
     "compression": "1.7.2",
@@ -61,6 +52,7 @@
     "winston": "2.4.1"
   },
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "chai": "4.1.2",
     "commitizen": "^2.9.6",
     "coveralls": "^3.0.0",

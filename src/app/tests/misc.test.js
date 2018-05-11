@@ -1,8 +1,7 @@
-const request = require('supertest-as-promised');
-const httpStatus = require('http-status');
-const chai = require('chai'); // eslint-disable-line import/newline-after-import
-const expect = chai.expect;
-const app = require('../../index');
+import request from 'supertest-as-promised'
+import httpStatus from 'http-status'
+import chai, { expect } from 'chai'
+import app from '../../index'
 
 chai.config.includeStack = true;
 

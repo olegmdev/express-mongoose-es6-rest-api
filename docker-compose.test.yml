@@ -5,8 +5,6 @@ services:
     build:
       context: .
 
-    image: express-mongoose-es6-rest-api:latest
-
     volumes:
       # Mounts the project directory on the host to /app inside the container,
       # allowing you to modify the code without having to rebuild the image.
