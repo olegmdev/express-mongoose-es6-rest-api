@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import httpStatus from 'http-status'
 import APIError from '../helpers/APIError'
-import config from '../../config/config'
+import config from 'config'
 
 // sample user, used for authentication
 const user = {
@@ -9,7 +9,7 @@ const user = {
   password: 'express'
 };
 
-class AuthController {
+export default {
   /**
    * Returns jwt token if valid username and password is provided
    * @param req
@@ -23,7 +23,7 @@ class AuthController {
     if (req.body.username === user.username && req.body.password === user.password) {
       const token = jwt.sign({
         username: user.username
-      }, config.jwtSecret);
+      }, config.get('jwtSecret'));
       return res.json({
         token,
         username: user.username
@@ -31,8 +31,8 @@ class AuthController {
     }
 
     const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
-    return next(err);
-  }
+    next(err);
+  },
 
   /**
    * This is a protected route. Will return random number only if jwt token is provided in header.
@@ -42,11 +42,9 @@ class AuthController {
    */
   getRandomNumber(req, res) {
     // req.user is assigned by jwt middleware if valid token is provided
-    return res.json({
+    res.json({
       user: req.user,
       num: Math.random() * 100
     });
   }
 }
-
-module.exports = new AuthController;

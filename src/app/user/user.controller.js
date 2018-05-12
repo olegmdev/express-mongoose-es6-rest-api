@@ -1,25 +1,26 @@
 import User from './user.model'
 
-class UserController {
+export default {
+
   /**
    * Load user and append to req.
    */
   load(req, res, next, id) {
     User.get(id)
       .then((user) => {
-      req.user = user; // eslint-disable-line no-param-reassign
-    return next();
-  })
-  .catch(e => next(e));
-  }
+        req.user = user; // eslint-disable-line no-param-reassign
+        next();
+      })
+      .catch(e => next(e));
+  },
 
   /**
    * Get user
    * @returns {User}
    */
   get(req, res) {
-    return res.json(req.user);
-  }
+    res.json(req.user);
+  },
 
   /**
    * Create new user
@@ -35,8 +36,8 @@ class UserController {
 
     user.save()
       .then(savedUser => res.json(savedUser))
-  .catch(e => next(e));
-  }
+      .catch(e => next(e));
+  },
 
   /**
    * Update existing user
@@ -46,13 +47,14 @@ class UserController {
    */
   update(req, res, next) {
     const user = req.user;
+
     user.username = req.body.username;
     user.mobileNumber = req.body.mobileNumber;
 
     user.save()
       .then(savedUser => res.json(savedUser))
-  .catch(e => next(e));
-  }
+      .catch(e => next(e));
+  },
 
   /**
    * Get user list.
@@ -62,10 +64,11 @@ class UserController {
    */
   list(req, res, next) {
     const { limit = 50, skip = 0 } = req.query;
+
     User.list({ limit, skip })
       .then(users => res.json(users))
-  .catch(e => next(e));
-  }
+      .catch(e => next(e));
+  },
 
   /**
    * Delete user.
@@ -73,11 +76,9 @@ class UserController {
    */
   remove(req, res, next) {
     const user = req.user;
+
     user.remove()
       .then(deletedUser => res.json(deletedUser))
-  .catch(e => next(e));
+      .catch(e => next(e));
   }
 }
-
-
-module.exports = new UserController()

@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-module.exports = {
+export default {
   // POST /api/users
   createUser: {
     body: {
@@ -17,14 +17,6 @@ module.exports = {
     },
     params: {
       userId: Joi.string().hex().required()
-    }
-  },
-
-  // POST /api/auth/login
-  login: {
-    body: {
-      username: Joi.string().required(),
-      password: Joi.string().required()
     }
   }
 };
